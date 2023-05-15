@@ -46,9 +46,12 @@ use yii\bootstrap\Nav;
 
                     $menuItems = [
                         ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
-                        ['label' => 'About', 'url' => ['/site/about']],
-                        ['label' => 'Contact', 'url' => ['/site/contact']],
-                        // ['label' => Yii::t('app', 'Request'), 'url' => ['/operator/requester/index']],
+                        // ['label' => 'About', 'url' => ['/site/about']],
+                        // ['label' => 'Contact', 'url' => ['/site/contact']],
+                        ['label' => Yii::t('app', 'sale-order'), 'url' => ['/sale-order/index']],
+                        ['label' => Yii::t('app', 'planning'), 'url' => ['/planning/index']],
+                        ['label' => Yii::t('app', 'production'), 'url' => ['/production/index']],
+                        ['label' => Yii::t('app', 'warehouse'), 'url' => ['/warehouse/index']],
                         // ['label' => Yii::t('app', 'Reviewer'), 'url' => ['/operator/reviewer/index']],
                         // ['label' => Yii::t('app', 'Private Document'), 'url' => ['/operator/private-requester/index']],
                         [
@@ -58,15 +61,15 @@ use yii\bootstrap\Nav;
                             'visible' => Yii::$app->user->isGuest,
                         ],
 
-                        // [
-                        //     'label' => Yii::t('app', 'Reports'), 'icon' => 'fas fa-chart-pie', 'items' => [
-                        //         ['label' => Yii::t('app', 'categories'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/index']],
-                        //         ['label' => Yii::t('app', 'types'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report1']],
-                        //         ['label' => Yii::t('app', 'status'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report2']],
-                        //         ['label' => Yii::t('app', 'report3 Calendar'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report3']],
-                        //         ['label' => Yii::t('app', 'Ex.'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report4']],
-                        //     ]
-                        // ],
+                        [
+                            'label' => Yii::t('app', 'Backend'), 'icon' => 'fas fa-chart-pie', 'items' => [
+                                ['label' => Yii::t('app', 'counting-unit'), 'icon' => 'circle-o text-primary', 'url' => ['/counting-unit/index']],
+                                ['label' => Yii::t('app', 'types'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report1']],
+                                ['label' => Yii::t('app', 'status'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report2']],
+                                ['label' => Yii::t('app', 'report3 Calendar'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report3']],
+                                ['label' => Yii::t('app', 'Ex.'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report4']],
+                            ]
+                        ],
 
 
                         Yii::$app->user->isGuest ?
