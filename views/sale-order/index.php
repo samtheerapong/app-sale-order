@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             // 'status.status_name',
             [
-                'attribute' => 'status_id',
+                'attribute' => 'status',
                 'format' => 'html',
                 'value' => function ($model) {
                     return '<span class="badge" style="background-color:' . $model->status->status_color . ';"><b>' . $model->status->status_name . '</b></span>';

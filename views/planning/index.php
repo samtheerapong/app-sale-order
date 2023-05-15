@@ -27,6 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            [
+                'attribute' => 'status',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return $model->saleOrder->status->status_name;
+                },
+                // 'filter' => Html::activeDropDownList($searchModel, 'status_id', ArrayHelper::map(Status::find()->all(), 'id', 'status_name'), ['class' => 'form-control', 'prompt' => 'เลือก...'])
+            ],
             'sale_order_id',
             'planning_details:ntext',
 
