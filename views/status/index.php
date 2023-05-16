@@ -39,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             return '<span class="badge" style="background-color:' . $model->status_color . ';"><b>' . $model->status_code . '</b></span>';
                         },
                         // 'filter' => Html::activeDropDownList($searchModel, 'id', ArrayHelper::map(Status::find()->all(), 'id', 'status_code'), ['class' => 'form-control', 'prompt' => Yii::t('app', 'Select...')])
+                        
+                        // ******* แบบใช้ Select2 ******* 
                         'filter' => Select2::widget([
                             'model' => $searchModel,
                             'attribute' => 'id',
@@ -53,7 +55,19 @@ $this->params['breadcrumbs'][] = $this->title;
                         ])
                     ],
                     'status_name',
-                    'status_details:ntext',
+                    // 'status_details:ntext',
+                    [
+                        'attribute' => 'status_details',
+                        'format' => 'ntext',
+                        'value' => function ($model) {
+                            // ******* ตัดตัวอักษรที่ 50 แล้วใส่ ... ต่อท้าย ******* 
+                            $text = $model->status_details;
+                            if (mb_strlen($text) > 50) {
+                                $text = mb_substr($text, 0, 50) . '...';
+                            }
+                            return $text;
+                        },
+                    ],
                     // 'status_color',
                     //'actived',
                     [
@@ -62,8 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function ($model) {
                             return $model->actived == 1 ? "<span style=\"color:green;\">" . Yii::t('app', 'Yes') . " </span>" : "<span style=\"color:red;\">" . Yii::t('app', 'No') . "</span>";
                         },
-                        'options' => ['style' => 'width:120px;'],
-                        'contentOptions' => ['class' => 'text-center'],
+                        'options' => ['style' => 'width:120px;'], // กำหนดขนาดความกว้าง
+                        'contentOptions' => ['class' => 'text-center'], // จัดตรงกลาง
                         'filter' => Html::activeDropDownList($searchModel, 'actived', ['1' => Yii::t('app', 'Yes'), '2' => Yii::t('app', 'No')], ['class' => 'form-control', 'prompt' => Yii::t('app', 'Select...')])
                     ],
 
