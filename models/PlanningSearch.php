@@ -11,14 +11,19 @@ use app\models\Planning;
  */
 class PlanningSearch extends Planning
 {
+
+    // **************** เพิ่ม  1 ********************
+    public $status_id;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'sale_order_id', 'planning_by'], 'integer'],
-            [['planning_at', 'planning_start', 'planning_end', 'planning_details'], 'safe'],
+            [['id', 'sale_order_id', 'created_by', 'updated_by'], 'integer'],
+            [['planning_start', 'planning_end', 'planning_details', 'created_at', 'updated_at'], 'safe'],
+            [['status_id'], 'integer'], // **************** เพิ่ม  2 ********************
         ];
     }
 
@@ -40,7 +45,11 @@ class PlanningSearch extends Planning
      */
     public function search($params)
     {
-        $query = Planning::find();
+        // $query = Planning::find();
+
+        // **************** เพิ่ม  3 ********************
+        $query = Planning::find()->joinWith('saleOrder.status');
+        $query->joinWith(['saleOrder.status']); // Join the 'status' relation
 
         // add conditions that should always apply here
 
@@ -56,14 +65,22 @@ class PlanningSearch extends Planning
             return $dataProvider;
         }
 
+
+        // **************** เพิ่ม  4 ********************
+        // Filter by status_id
+        $query->andFilterWhere(['status.id' => $this->status_id]);
+
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'sale_order_id' => $this->sale_order_id,
-            'planning_by' => $this->planning_by,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'planning_at', $this->planning_at])
+        $query->andFilterWhere(['like', 'created_at', $this->created_at])
+            ->andFilterWhere(['like', 'updated_at', $this->updated_at])
             ->andFilterWhere(['like', 'planning_start', $this->planning_start])
             ->andFilterWhere(['like', 'planning_end', $this->planning_end])
             ->andFilterWhere(['like', 'planning_details', $this->planning_details]);

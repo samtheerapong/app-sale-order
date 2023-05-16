@@ -2,6 +2,9 @@
 
 namespace app\models;
 
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+
 use Yii;
 
 /**
@@ -20,6 +23,21 @@ use Yii;
  */
 class Planning extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'value' => function () {
+                    return date('Y-m-d H:i:s');
+                },
+            ],
+            [
+                'class' => BlameableBehavior::class,
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -34,9 +52,10 @@ class Planning extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sale_order_id', 'planning_by'], 'integer'],
+            [['sale_order_id'], 'integer'],
             [['planning_details'], 'string'],
-            [['planning_at', 'planning_start', 'planning_end'], 'string', 'max' => 45],
+            [['planning_start', 'planning_end'], 'string', 'max' => 45],
+            [['planning_start', 'planning_end','planning_details'], 'required'],
             [['sale_order_id'], 'exist', 'skipOnError' => true, 'targetClass' => SaleOrder::className(), 'targetAttribute' => ['sale_order_id' => 'id']],
         ];
     }
@@ -47,13 +66,15 @@ class Planning extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'sale_order_id' => Yii::t('app', 'ใบสั่งขาย'),
-            'planning_by' => Yii::t('app', 'โดย'),
-            'planning_at' => Yii::t('app', 'วันที่'),
-            'planning_start' => Yii::t('app', 'เริ่ม'),
-            'planning_end' => Yii::t('app', 'เสร็จ'),
-            'planning_details' => Yii::t('app', 'รายละเอียด'),
+            'id' => Yii::t('app', 'id'),
+            'sale_order_id' => Yii::t('app', 'sale_order_id'),
+            'created_by' => Yii::t('app', 'created_by'),
+            'updated_by' => Yii::t('app', 'updated_by'),
+            'created_at' => Yii::t('app', 'created_at'),
+            'updated_at' => Yii::t('app', 'updated_at'),
+            'planning_start' => Yii::t('app', 'planning_start'),
+            'planning_end' => Yii::t('app', 'planning_end'),
+            'planning_details' => Yii::t('app', 'planning_details'),
         ];
     }
 

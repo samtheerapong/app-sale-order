@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Planning;
 use app\models\PlanningSearch;
+use app\models\SaleOrder;
+use app\models\SaleOrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,10 +37,23 @@ class PlanningController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new PlanningSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionPlanning()
+    {
+
+        $searchModel = new SaleOrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('planning', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -85,14 +100,34 @@ class PlanningController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelSaleOrder = $this->findModelSaleOrder($model->sale_order_id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (
+            $model->load(Yii::$app->request->post()) &&
+            $modelSaleOrder->load(Yii::$app->request->post())
+        ) {
+
+            $modelSaleOrder->status_id = 2;
+            if ($modelSaleOrder->save()) {
+                $model->save();
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'modelSaleOrder' => $modelSaleOrder,
         ]);
+    }
+
+    protected function findModelSaleOrder($id)
+    {
+        if (($model = SaleOrder::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     /**

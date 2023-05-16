@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\SaleOrder;
+use app\models\Planning;
 use app\models\SaleOrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,15 +66,56 @@ class SaleOrderController extends Controller
     public function actionCreate()
     {
         $model = new SaleOrder();
+        $modelPlanning = new Planning();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && $modelPlanning->load(Yii::$app->request->post())) {
+                $transaction = Yii::$app->db->beginTransaction();
+                try {
+                    if ($model->save()) {
+                        $modelPlanning->sale_order_id = $model->id;
+                        if ($modelPlanning->save()) {
+                            $transaction->commit();
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
+                    }
+                    $transaction->rollBack();
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                    throw $e;
+                }
+            }
         }
 
         return $this->render('create', [
             'model' => $model,
+            'modelPlanning' => $modelPlanning,
         ]);
     }
+    // public function actionCreate()
+    // {
+    //     $model = new SaleOrder();
+    //     $modelPlanning = new Planning();
+
+    //     if (
+    //         $model->load(Yii::$app->request->post()) 
+    //         && $modelPlanning->load(Yii::$app->request->post())
+    //     ) {
+
+    //         $modelPlanning->sale_order_id = $model->id;
+
+    //         if ($modelPlanning->save()) {
+    //             $model->save();
+    //         }
+
+    //         $model->save();
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     }
+
+    //     return $this->render('create', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Updates an existing SaleOrder model.

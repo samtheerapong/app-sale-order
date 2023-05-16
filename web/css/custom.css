@@ -12,9 +12,27 @@
 .home-link {
   background-color: #ff3442;
 }
-  .register-link {
+.register-link {
   background-color: #678052;
 }
-  .sign-in-link {
+.sign-in-link {
   background-color: #0f1ee0;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
 }

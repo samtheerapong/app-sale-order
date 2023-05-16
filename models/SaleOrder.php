@@ -93,7 +93,7 @@ class SaleOrder extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'ปรับปรุง'),
             'created_by' => Yii::t('app', 'สร้างโดย'),
             'updated_by' => Yii::t('app', 'ปรับปรุงโดย'),
-            'order_number' => Yii::t('app', 'เลขที่ใบสั่งซื้อ'),
+            'order_number' => Yii::t('app', 'เลขที่ใบสั่งขาย'),
             'customer_id' => Yii::t('app', 'ลูกค้า'),
             'title' => Yii::t('app', 'หัวเรื่อง'),
             'details' => Yii::t('app', 'รายละเอียด'),
