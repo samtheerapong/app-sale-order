@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'planning_id',
+            'production_by',
+            'production_at',
+            'production_start',
+            'production_end',
             'production_details:ntext',
         ],
     ]) ?>

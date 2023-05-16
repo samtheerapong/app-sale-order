@@ -12,7 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'production_id')->textInput() ?>
+    <?= $form->field($model, 'qc_id')->textInput() ?>
+
+    <?= $form->field($model, 'warehouse_by')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'warehouse_at')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'warehouse_start')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'warehouse_end')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'warehouse_details')->textarea(['rows' => 6]) ?>
 

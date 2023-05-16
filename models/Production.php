@@ -8,11 +8,15 @@ use Yii;
  * This is the model class for table "production".
  *
  * @property int $id
- * @property int|null $planning_id
- * @property string|null $production_details
+ * @property int|null $planning_id แผนผลิต
+ * @property string|null $production_by โดย
+ * @property string|null $production_at วันที่
+ * @property string|null $production_start เริ่ม
+ * @property string|null $production_end เสร็จ
+ * @property string|null $production_details รายละเอียด
  *
  * @property Planning $planning
- * @property Warehouse[] $warehouses
+ * @property Qc[] $qcs
  */
 class Production extends \yii\db\ActiveRecord
 {
@@ -32,6 +36,7 @@ class Production extends \yii\db\ActiveRecord
         return [
             [['planning_id'], 'integer'],
             [['production_details'], 'string'],
+            [['production_by', 'production_at', 'production_start', 'production_end'], 'string', 'max' => 45],
             [['planning_id'], 'exist', 'skipOnError' => true, 'targetClass' => Planning::className(), 'targetAttribute' => ['planning_id' => 'id']],
         ];
     }
@@ -43,8 +48,12 @@ class Production extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'planning_id' => Yii::t('app', 'Planning ID'),
-            'production_details' => Yii::t('app', 'Production Details'),
+            'planning_id' => Yii::t('app', 'แผนผลิต'),
+            'production_by' => Yii::t('app', 'โดย'),
+            'production_at' => Yii::t('app', 'วันที่'),
+            'production_start' => Yii::t('app', 'เริ่ม'),
+            'production_end' => Yii::t('app', 'เสร็จ'),
+            'production_details' => Yii::t('app', 'รายละเอียด'),
         ];
     }
 
@@ -59,12 +68,12 @@ class Production extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Warehouses]].
+     * Gets query for [[Qcs]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getWarehouses()
+    public function getQcs()
     {
-        return $this->hasMany(Warehouse::className(), ['production_id' => 'id']);
+        return $this->hasMany(Qc::className(), ['production_id' => 'id']);
     }
 }

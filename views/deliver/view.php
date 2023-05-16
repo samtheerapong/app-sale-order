@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'warehouse_id',
+            'deliver_by',
+            'deliver_at',
+            'deliver_start',
+            'deliver_end',
             'deliver_details:ntext',
         ],
     ]) ?>

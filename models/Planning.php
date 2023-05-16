@@ -8,8 +8,12 @@ use Yii;
  * This is the model class for table "planning".
  *
  * @property int $id
- * @property int|null $sale_order_id เลขที่ใบสั่งขาย
- * @property string|null $planning_details
+ * @property int|null $sale_order_id ใบสั่งขาย
+ * @property int|null $planning_by โดย
+ * @property string|null $planning_at วันที่
+ * @property string|null $planning_start เริ่ม
+ * @property string|null $planning_end เสร็จ
+ * @property string|null $planning_details รายละเอียด
  *
  * @property SaleOrder $saleOrder
  * @property Production[] $productions
@@ -30,8 +34,9 @@ class Planning extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sale_order_id'], 'integer'],
+            [['sale_order_id', 'planning_by'], 'integer'],
             [['planning_details'], 'string'],
+            [['planning_at', 'planning_start', 'planning_end'], 'string', 'max' => 45],
             [['sale_order_id'], 'exist', 'skipOnError' => true, 'targetClass' => SaleOrder::className(), 'targetAttribute' => ['sale_order_id' => 'id']],
         ];
     }
@@ -43,8 +48,12 @@ class Planning extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'sale_order_id' => Yii::t('app', 'เลขที่ใบสั่งขาย'),
-            'planning_details' => Yii::t('app', 'Planning Details'),
+            'sale_order_id' => Yii::t('app', 'ใบสั่งขาย'),
+            'planning_by' => Yii::t('app', 'โดย'),
+            'planning_at' => Yii::t('app', 'วันที่'),
+            'planning_start' => Yii::t('app', 'เริ่ม'),
+            'planning_end' => Yii::t('app', 'เสร็จ'),
+            'planning_details' => Yii::t('app', 'รายละเอียด'),
         ];
     }
 

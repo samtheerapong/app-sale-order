@@ -19,7 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'warehouse_id') ?>
 
-    <?= $form->field($model, 'deliver_details') ?>
+    <?= $form->field($model, 'deliver_by') ?>
+
+    <?= $form->field($model, 'deliver_at') ?>
+
+    <?= $form->field($model, 'deliver_start') ?>
+
+    <?php // echo $form->field($model, 'deliver_end') ?>
+
+    <?php // echo $form->field($model, 'deliver_details') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

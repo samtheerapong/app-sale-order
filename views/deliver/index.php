@@ -28,7 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'warehouse_id',
-            'deliver_details:ntext',
+            'deliver_by',
+            'deliver_at',
+            'deliver_start',
+            //'deliver_end',
+            //'deliver_details:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

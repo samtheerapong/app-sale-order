@@ -19,7 +19,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'planning_id') ?>
 
-    <?= $form->field($model, 'production_details') ?>
+    <?= $form->field($model, 'production_by') ?>
+
+    <?= $form->field($model, 'production_at') ?>
+
+    <?= $form->field($model, 'production_start') ?>
+
+    <?php // echo $form->field($model, 'production_end') ?>
+
+    <?php // echo $form->field($model, 'production_details') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

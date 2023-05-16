@@ -17,9 +17,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'production_id') ?>
+    <?= $form->field($model, 'qc_id') ?>
 
-    <?= $form->field($model, 'warehouse_details') ?>
+    <?= $form->field($model, 'warehouse_by') ?>
+
+    <?= $form->field($model, 'warehouse_at') ?>
+
+    <?= $form->field($model, 'warehouse_start') ?>
+
+    <?php // echo $form->field($model, 'warehouse_end') ?>
+
+    <?php // echo $form->field($model, 'warehouse_details') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

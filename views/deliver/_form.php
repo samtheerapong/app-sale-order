@@ -14,6 +14,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'warehouse_id')->textInput() ?>
 
+    <?= $form->field($model, 'deliver_by')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'deliver_at')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'deliver_start')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'deliver_end')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'deliver_details')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">

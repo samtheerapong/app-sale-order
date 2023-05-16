@@ -18,7 +18,7 @@ class ProductionSearch extends Production
     {
         return [
             [['id', 'planning_id'], 'integer'],
-            [['production_details'], 'safe'],
+            [['production_by', 'production_at', 'production_start', 'production_end', 'production_details'], 'safe'],
         ];
     }
 
@@ -62,7 +62,11 @@ class ProductionSearch extends Production
             'planning_id' => $this->planning_id,
         ]);
 
-        $query->andFilterWhere(['like', 'production_details', $this->production_details]);
+        $query->andFilterWhere(['like', 'production_by', $this->production_by])
+            ->andFilterWhere(['like', 'production_at', $this->production_at])
+            ->andFilterWhere(['like', 'production_start', $this->production_start])
+            ->andFilterWhere(['like', 'production_end', $this->production_end])
+            ->andFilterWhere(['like', 'production_details', $this->production_details]);
 
         return $dataProvider;
     }

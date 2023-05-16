@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ProductionSearch */
+/* @var $searchModel app\models\QcSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Productions');
+$this->title = Yii::t('app', 'Qcs');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="production-index">
+<div class="qc-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Production'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Qc'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,12 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'planning_id',
-            'production_by',
-            'production_at',
-            'production_start',
-            //'production_end',
-            //'production_details:ntext',
+            'production_id',
+            'qc_by',
+            'qc_at',
+            'qc_start',
+            //'qc_end',
+            //'qc_details:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Warehouse */
+/* @var $model app\models\Qc */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Warehouses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Qcs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="warehouse-view">
+<div class="qc-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,12 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'qc_id',
-            'warehouse_by',
-            'warehouse_at',
-            'warehouse_start',
-            'warehouse_end',
-            'warehouse_details:ntext',
+            'production_id',
+            'qc_by',
+            'qc_at',
+            'qc_start',
+            'qc_end',
+            'qc_details:ntext',
         ],
     ]) ?>
 

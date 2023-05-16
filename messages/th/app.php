@@ -13,49 +13,48 @@ return [
     'Update' => 'ปรับปรุง',
     'Delete' => 'ลบข้อมูล',
     'Back' => 'ย้อนกลับ',
-    'Tasks' => 'ตารางงาน',
-    'Request' => 'ร้องขอ',
-    'Reviewer' => 'ทบทวน',
-    'Approver' => 'อนุมัติ',
-    'Backend' => 'หลังบ้าน',
-    'categories' => 'ระดับเอกสาร',
-    'departments' => 'แผนก',
-    'points' => 'หลังบ้าน',
-    'stamps' => 'ประทับตรา',
-    'status' => 'สถานะ',
-    'types' => 'ประเภทการร้องขอ',
     'Select...' => 'เลือก...',
     'Reports' => 'รายงาน',
     'Name' => 'ชื่อ',
     'Public Email' => 'อีเมล',
-    // Requester
-    'Reviewer' => 'ผู้ทบทวน',
-    'requester_id' => 'เอกสารที่ร้องขอ',
-    'reviewer_name' => 'ทบทวนโดย',
-    'reviewer_at' => 'ทบทวนเมื่อ',
-    'document_number' => 'เลขที่เอกสาร',
-    'document_revision' => 'แก้ไขครั้งที่ (Rev)',
-    'document_age' => 'อายุของเอกสาร (ปี)',
-    'document_public_at' => 'วันที่ประกาศใช้',
-    'stamps_id' => 'ประทับตรา',
-    'document_ref' => 'เอกสารอ้างอิง',
-    'document_tags' => '#แท็ก',
-    'points_id' => 'จุดรับเอกสาร',
-    'reviewer_comment' => 'ความคิดเห็นของผู้ทบทวน',
-    'additional_training' => 'การอบรมเพิ่มเติม',
-    'categories_id' => 'ระดับเอกสาร(CODE)',
-    'reviewerName.profile.name' => 'ผู้ทบทวน',
-    'approver_name' => 'ผู้อนุมัติ',
-    'approver_at' => 'อนุมัติเมื่อ',
-    'approver_comment' => 'ความคิดเห็นของผู้อนุมัติ',
-    'Approve' => 'ทบทวนและอนุมัติ',
-    // Categories
-    'Categories' => 'ระดับเอกสาร',
-    'Category' => 'ระดับเอกสาร',
-    'Private Document' => 'เอกสารส่วนตัว',
-    'No Data' => 'ไม่มีข้อมูล',
-    'No Reviewer' => 'ยังไม่ได้รับการทบทวนเอกสาร',
-    'No Approver' => 'ยังไม่ได้รับการอนุมัติเอกสาร',
+    'Yes' => 'ใช่',
+    'No' => 'ใม่',
+    'Public Email' => 'อีเมล',
+    'Backend' => 'หลังบ้าน',
+
+    // Status
+    'Status' => 'สถานะ',
+    'Create Status' => 'เพิ่มสถานะ',
+    'Update Status' => 'ปรับปรุง',
+
+    // Customer
+    'Customer' => 'ลูกค้า',
+    'Create Customer' => 'เพิ่มลูกค้า',
+    'Update Customer' => 'ปรับปรุง',
+
+    // Customer Type
+    'Customer Type' => 'ประเภทลูกค้า',
+    'Create Customer Type' => 'เพิ่มประเภทลูกค้า',
+    'Update Customer Type' => 'ปรับปรุง',
+
+    // Sale order
+    'sale-order' => 'ขาย',
+
+    // Planning
+    'planning' => 'วางแผน',
+
+    // Production
+    'production' => 'ผลิต',
+
+    // QC
+    'qc' => 'ควบคุมคุณภาพ',
+
+    // Warehouse
+    'warehouse' => 'คลัง',
+    
+    // Deliver
+    'deliver' => 'ขนส่ง',
+    
 
     
     

@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'sale_order_id',
+            'planning_by',
+            'planning_at',
+            'planning_start',
+            'planning_end',
             'planning_details:ntext',
         ],
     ]) ?>

@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Deliver;
+use app\models\Qc;
 
 /**
- * DeliverSearch represents the model behind the search form of `app\models\Deliver`.
+ * QcSearch represents the model behind the search form of `app\models\Qc`.
  */
-class DeliverSearch extends Deliver
+class QcSearch extends Qc
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class DeliverSearch extends Deliver
     public function rules()
     {
         return [
-            [['id', 'warehouse_id'], 'integer'],
-            [['deliver_by', 'deliver_at', 'deliver_start', 'deliver_end', 'deliver_details'], 'safe'],
+            [['id', 'production_id', 'qc_by'], 'integer'],
+            [['qc_at', 'qc_start', 'qc_end', 'qc_details'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class DeliverSearch extends Deliver
      */
     public function search($params)
     {
-        $query = Deliver::find();
+        $query = Qc::find();
 
         // add conditions that should always apply here
 
@@ -59,14 +59,14 @@ class DeliverSearch extends Deliver
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'warehouse_id' => $this->warehouse_id,
+            'production_id' => $this->production_id,
+            'qc_by' => $this->qc_by,
         ]);
 
-        $query->andFilterWhere(['like', 'deliver_by', $this->deliver_by])
-            ->andFilterWhere(['like', 'deliver_at', $this->deliver_at])
-            ->andFilterWhere(['like', 'deliver_start', $this->deliver_start])
-            ->andFilterWhere(['like', 'deliver_end', $this->deliver_end])
-            ->andFilterWhere(['like', 'deliver_details', $this->deliver_details]);
+        $query->andFilterWhere(['like', 'qc_at', $this->qc_at])
+            ->andFilterWhere(['like', 'qc_start', $this->qc_start])
+            ->andFilterWhere(['like', 'qc_end', $this->qc_end])
+            ->andFilterWhere(['like', 'qc_details', $this->qc_details]);
 
         return $dataProvider;
     }

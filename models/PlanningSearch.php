@@ -17,8 +17,8 @@ class PlanningSearch extends Planning
     public function rules()
     {
         return [
-            [['id', 'sale_order_id'], 'integer'],
-            [['planning_details'], 'safe'],
+            [['id', 'sale_order_id', 'planning_by'], 'integer'],
+            [['planning_at', 'planning_start', 'planning_end', 'planning_details'], 'safe'],
         ];
     }
 
@@ -60,9 +60,13 @@ class PlanningSearch extends Planning
         $query->andFilterWhere([
             'id' => $this->id,
             'sale_order_id' => $this->sale_order_id,
+            'planning_by' => $this->planning_by,
         ]);
 
-        $query->andFilterWhere(['like', 'planning_details', $this->planning_details]);
+        $query->andFilterWhere(['like', 'planning_at', $this->planning_at])
+            ->andFilterWhere(['like', 'planning_start', $this->planning_start])
+            ->andFilterWhere(['like', 'planning_end', $this->planning_end])
+            ->andFilterWhere(['like', 'planning_details', $this->planning_details]);
 
         return $dataProvider;
     }

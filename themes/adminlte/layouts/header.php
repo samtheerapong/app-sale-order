@@ -14,7 +14,7 @@ use yii\bootstrap\Nav;
     }
 
     .register-link {
-        background-color: #678052;
+        background-color: #FF6D60;
     }
 
     .sign-in-link {
@@ -22,7 +22,7 @@ use yii\bootstrap\Nav;
     }
 
     .backend-link {
-        background-color: #fffff6;
+        background-color: #1B9C85;
     }
 </style>
 
@@ -51,27 +51,30 @@ use yii\bootstrap\Nav;
                         ['label' => Yii::t('app', 'sale-order'), 'url' => ['/sale-order/index']],
                         ['label' => Yii::t('app', 'planning'), 'url' => ['/planning/index']],
                         ['label' => Yii::t('app', 'production'), 'url' => ['/production/index']],
+                        ['label' => Yii::t('app', 'qc'), 'url' => ['/qc/index']],
                         ['label' => Yii::t('app', 'warehouse'), 'url' => ['/warehouse/index']],
-                        // ['label' => Yii::t('app', 'Reviewer'), 'url' => ['/operator/reviewer/index']],
-                        // ['label' => Yii::t('app', 'Private Document'), 'url' => ['/operator/private-requester/index']],
+                        ['label' => Yii::t('app', 'deliver'), 'url' => ['/deliver/index']],
+                        
+                        Yii::$app->user->isGuest ? '' : 
+                        [
+                            'label' => Yii::t('app', 'Backend'), 'options' => ['class' => 'backend-link'], 'icon' => 'fas fa-chart-pie', 'items' => [
+                                ['label' => Yii::t('app', 'Customer'), 'icon' => 'circle-o text-primary', 'url' => ['/customer/index']],
+                                ['label' => Yii::t('app', 'Customer Type'), 'icon' => 'circle-o text-primary', 'url' => ['/customer-type/index']],
+                                ['label' => Yii::t('app', 'Location'), 'icon' => 'circle-o text-primary', 'url' => ['/location/index']],
+                                ['label' => Yii::t('app', 'Counting Unit'), 'icon' => 'circle-o text-primary', 'url' => ['/counting-unit/index']],
+                                ['label' => Yii::t('app', 'Status'), 'icon' => 'circle-o text-primary', 'url' => ['/status/index']],
+                                ['label' => Yii::t('app', 'Department'), 'icon' => 'circle-o text-primary', 'url' => ['/department/index']],
+                                ['label' => Yii::t('app', 'Product List'), 'icon' => 'circle-o text-primary', 'url' => ['/product-list/index']],
+                             
+                            ]
+                        ] ,
+                        
                         [
                             'label' => 'สมัครสมาชิก',
                             'url' => ['/user/registration/register'],
                             'options' => ['class' => 'register-link'],
                             'visible' => Yii::$app->user->isGuest,
                         ],
-
-                        [
-                            'label' => Yii::t('app', 'Backend'), 'icon' => 'fas fa-chart-pie', 'items' => [
-                                ['label' => Yii::t('app', 'counting-unit'), 'icon' => 'circle-o text-primary', 'url' => ['/counting-unit/index']],
-                                ['label' => Yii::t('app', 'types'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report1']],
-                                ['label' => Yii::t('app', 'status'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report2']],
-                                ['label' => Yii::t('app', 'report3 Calendar'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report3']],
-                                ['label' => Yii::t('app', 'Ex.'), 'icon' => 'circle-o text-primary', 'url' => ['/operator/report/report4']],
-                            ]
-                        ],
-
-
                         Yii::$app->user->isGuest ?
                             ['label' => 'เข้าสู่ระบบ', 'url' => ['/user/security/login'], 'options' => ['class' => 'sign-in-link'],] :
                             [

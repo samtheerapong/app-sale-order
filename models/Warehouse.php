@@ -8,11 +8,15 @@ use Yii;
  * This is the model class for table "warehouse".
  *
  * @property int $id
- * @property int|null $production_id
- * @property string|null $warehouse_details
+ * @property int $qc_id คุณภาพ
+ * @property string|null $warehouse_by โดย
+ * @property string|null $warehouse_at วันที่
+ * @property string|null $warehouse_start เริ่ม
+ * @property string|null $warehouse_end เสร็จ
+ * @property string|null $warehouse_details รายละเอียด
  *
  * @property Deliver[] $delivers
- * @property Production $production
+ * @property Qc $qc
  */
 class Warehouse extends \yii\db\ActiveRecord
 {
@@ -30,9 +34,11 @@ class Warehouse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['production_id'], 'integer'],
+            [['qc_id'], 'required'],
+            [['qc_id'], 'integer'],
             [['warehouse_details'], 'string'],
-            [['production_id'], 'exist', 'skipOnError' => true, 'targetClass' => Production::className(), 'targetAttribute' => ['production_id' => 'id']],
+            [['warehouse_by', 'warehouse_at', 'warehouse_start', 'warehouse_end'], 'string', 'max' => 45],
+            [['qc_id'], 'exist', 'skipOnError' => true, 'targetClass' => Qc::className(), 'targetAttribute' => ['qc_id' => 'id']],
         ];
     }
 
@@ -43,8 +49,12 @@ class Warehouse extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'production_id' => Yii::t('app', 'Production ID'),
-            'warehouse_details' => Yii::t('app', 'Warehouse Details'),
+            'qc_id' => Yii::t('app', 'คุณภาพ'),
+            'warehouse_by' => Yii::t('app', 'โดย'),
+            'warehouse_at' => Yii::t('app', 'วันที่'),
+            'warehouse_start' => Yii::t('app', 'เริ่ม'),
+            'warehouse_end' => Yii::t('app', 'เสร็จ'),
+            'warehouse_details' => Yii::t('app', 'รายละเอียด'),
         ];
     }
 
@@ -59,12 +69,12 @@ class Warehouse extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Production]].
+     * Gets query for [[Qc]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProduction()
+    public function getQc()
     {
-        return $this->hasOne(Production::className(), ['id' => 'production_id']);
+        return $this->hasOne(Qc::className(), ['id' => 'qc_id']);
     }
 }

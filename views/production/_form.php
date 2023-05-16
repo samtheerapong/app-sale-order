@@ -14,6 +14,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'planning_id')->textInput() ?>
 
+    <?= $form->field($model, 'production_by')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'production_at')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'production_start')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'production_end')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'production_details')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
