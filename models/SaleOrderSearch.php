@@ -18,7 +18,7 @@ class SaleOrderSearch extends SaleOrder
     {
         return [
             [['id', 'status_id', 'customer_id'], 'integer'],
-            [['created_at', 'updated_at', 'created_by', 'updated_by', 'order_number', 'title', 'details', 'ref', 'remask'], 'safe'],
+            [['created_at', 'updated_at', 'created_by', 'updated_by', 'order_number', 'title', 'details', 'ref', 'remask','receipt_date'], 'safe'],
         ];
     }
 
@@ -67,6 +67,7 @@ class SaleOrderSearch extends SaleOrder
             ->andFilterWhere(['like', 'updated_at', $this->updated_at])
             ->andFilterWhere(['like', 'created_by', $this->created_by])
             ->andFilterWhere(['like', 'updated_by', $this->updated_by])
+            ->andFilterWhere(['like', 'receipt_date', $this->receipt_date])
             ->andFilterWhere(['like', 'order_number', $this->order_number])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'details', $this->details])

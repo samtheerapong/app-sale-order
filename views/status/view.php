@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </p>
     </div>
+    
     <div class="box box-info box-solid">
         <div class="box-header">
             <div class="box-title"><?= $this->title ?></div>

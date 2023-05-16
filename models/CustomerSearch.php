@@ -17,7 +17,7 @@ class CustomerSearch extends Customer
     public function rules()
     {
         return [
-            [['id', 'customer_type_id', 'active'], 'integer'],
+            [['id', 'customer_type_id', 'actived'], 'integer'],
             [['customer_code', 'customer_name', 'customer_en_name', 'customer_addr', 'customer_tel', 'customer_fax', 'customer_email'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class CustomerSearch extends Customer
         $query->andFilterWhere([
             'id' => $this->id,
             'customer_type_id' => $this->customer_type_id,
-            'active' => $this->active,
+            'actived' => $this->actived,
         ]);
 
         $query->andFilterWhere(['like', 'customer_code', $this->customer_code])

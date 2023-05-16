@@ -5,16 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Location */
 
-$this->title = Yii::t('app', 'Update Location: {name}', [
-    'name' => $model->id,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Locations'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->title = Yii::t('app', 'Update') . ' : ' . $model->location_name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Location'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->location_name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="location-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <p> <?= Html::a('<i class="fas fa-arrow-left"></i> ' . Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-primary']) ?></p>
 
     <?= $this->render('_form', [
         'model' => $model,

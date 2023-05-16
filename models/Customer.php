@@ -16,7 +16,7 @@ use Yii;
  * @property string|null $customer_tel เบอร์ติดต่อ
  * @property string|null $customer_fax เบอร์ fax
  * @property string|null $customer_email อีเมลลูกค้า
- * @property int|null $active เปิดใช้งาน
+ * @property int|null $actived เปิดใช้งาน
  *
  * @property CustomerType $customerType
  * @property SaleOrder[] $saleOrders
@@ -38,7 +38,7 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             [['customer_code', 'customer_name'], 'required'],
-            [['customer_type_id', 'active'], 'integer'],
+            [['customer_type_id', 'actived'], 'integer'],
             [['customer_addr'], 'string'],
             [['customer_code', 'customer_tel', 'customer_fax', 'customer_email'], 'string', 'max' => 45],
             [['customer_name', 'customer_en_name'], 'string', 'max' => 200],
@@ -61,7 +61,7 @@ class Customer extends \yii\db\ActiveRecord
             'customer_tel' => Yii::t('app', 'เบอร์ติดต่อ'),
             'customer_fax' => Yii::t('app', 'เบอร์ fax'),
             'customer_email' => Yii::t('app', 'อีเมลลูกค้า'),
-            'active' => Yii::t('app', 'เปิดใช้งาน'),
+            'actived' => Yii::t('app', 'เปิดใช้งาน'),
         ];
     }
 

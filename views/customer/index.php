@@ -55,7 +55,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'customer_tel',
                     //'customer_fax',
                     //'customer_email:email',
-                    //'active',
+                    [
+                        'attribute' => 'actived',
+                        'format' => 'html',
+                        'value' => function ($model) {
+                            return $model->actived == 1 ? "<span style=\"color:green;\">" . Yii::t('app', 'Yes') . " </span>" : "<span style=\"color:red;\">" . Yii::t('app', 'No') . "</span>";
+                        },
+                        'options' => ['style' => 'width:120px;'],
+                        'contentOptions' => ['class' => 'text-center'],
+                        'filter' => Html::activeDropDownList($searchModel, 'actived', ['1' => Yii::t('app', 'Yes'), '2' => Yii::t('app', 'No')], ['class' => 'form-control', 'prompt' => 'ทั้งหมด...'])
+                    ],
 
                     [
                         'class' => 'kartik\grid\ActionColumn',

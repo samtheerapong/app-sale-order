@@ -2,103 +2,109 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property string $username
+ * @property string $email
+ * @property string $password_hash
+ * @property string $auth_key
+ * @property int|null $confirmed_at
+ * @property string|null $unconfirmed_email
+ * @property int|null $blocked_at
+ * @property string|null $registration_ip
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $flags
+ * @property int|null $last_login_at
+ * @property int|null $status
+ * @property int|null $role
+ *
+ * @property Profile $profile
+ * @property SocialAccount[] $socialAccounts
+ * @property Token[] $tokens
+ */
+class User extends \yii\db\ActiveRecord
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
     /**
      * {@inheritdoc}
      */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'user';
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return [
+            [['username', 'email', 'password_hash', 'auth_key', 'created_at', 'updated_at'], 'required'],
+            [['confirmed_at', 'blocked_at', 'created_at', 'updated_at', 'flags', 'last_login_at', 'status', 'role'], 'integer'],
+            [['username', 'email', 'unconfirmed_email'], 'string', 'max' => 255],
+            [['password_hash'], 'string', 'max' => 60],
+            [['auth_key'], 'string', 'max' => 32],
+            [['registration_ip'], 'string', 'max' => 45],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+        ];
     }
 
     /**
-     * Finds user by username
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'username' => Yii::t('app', 'Username'),
+            'email' => Yii::t('app', 'Email'),
+            'password_hash' => Yii::t('app', 'Password Hash'),
+            'auth_key' => Yii::t('app', 'Auth Key'),
+            'confirmed_at' => Yii::t('app', 'Confirmed At'),
+            'unconfirmed_email' => Yii::t('app', 'Unconfirmed Email'),
+            'blocked_at' => Yii::t('app', 'Blocked At'),
+            'registration_ip' => Yii::t('app', 'Registration Ip'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'flags' => Yii::t('app', 'Flags'),
+            'last_login_at' => Yii::t('app', 'Last Login At'),
+            'status' => Yii::t('app', 'Status'),
+            'role' => Yii::t('app', 'Role'),
+        ];
+    }
+
+    /**
+     * Gets query for [[Profile]].
      *
-     * @param string $username
-     * @return static|null
+     * @return \yii\db\ActiveQuery
      */
-    public static function findByUsername($username)
+    public function getProfile()
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
+     * Gets query for [[SocialAccounts]].
      *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @return \yii\db\ActiveQuery
      */
-    public function validatePassword($password)
+    public function getSocialAccounts()
     {
-        return $this->password === $password;
+        return $this->hasMany(SocialAccount::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Tokens]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTokens()
+    {
+        return $this->hasMany(Token::className(), ['user_id' => 'id']);
     }
 }

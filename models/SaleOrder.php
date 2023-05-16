@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
@@ -12,6 +13,10 @@ use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\Json;
+
+//
+use app\models\User;
+use app\models\Profile;
 
 /**
  * This is the model class for table "sale_order".
@@ -33,6 +38,7 @@ use yii\helpers\Json;
  * @property ProductList[] $productLists
  * @property Customer $customer
  * @property Status $status
+ * @property receipt_date $receipt_date
  */
 class SaleOrder extends \yii\db\ActiveRecord
 {
@@ -41,13 +47,16 @@ class SaleOrder extends \yii\db\ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::class,
+                'value' => function() {
+                    return date('Y-m-d H:i:s');
+                },
             ],
             [
                 'class' => BlameableBehavior::class,
             ],
         ];
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -65,7 +74,7 @@ class SaleOrder extends \yii\db\ActiveRecord
             [['status_id'], 'required'],
             [['status_id', 'customer_id'], 'integer'],
             [['details', 'remask'], 'string'],
-            [['created_at', 'updated_at', 'created_by', 'updated_by', 'order_number', 'ref'], 'string', 'max' => 45],
+            [['created_at', 'updated_at', 'created_by', 'updated_by', 'order_number', 'ref', 'receipt_date'], 'string', 'max' => 45],
             [['title'], 'string', 'max' => 255],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
@@ -79,7 +88,7 @@ class SaleOrder extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'status_id' => Yii::t('app', 'Status ID'),
+            'status_id' => Yii::t('app', 'สถานะ'),
             'created_at' => Yii::t('app', 'วันที่'),
             'updated_at' => Yii::t('app', 'ปรับปรุง'),
             'created_by' => Yii::t('app', 'สร้างโดย'),
@@ -90,6 +99,7 @@ class SaleOrder extends \yii\db\ActiveRecord
             'details' => Yii::t('app', 'รายละเอียด'),
             'ref' => Yii::t('app', 'อ้างอิง'),
             'remask' => Yii::t('app', 'หมายเหตุ'),
+            'receipt_date' => Yii::t('app', 'วันที่ต้องการสินค้า'),
         ];
     }
 
@@ -131,5 +141,10 @@ class SaleOrder extends \yii\db\ActiveRecord
     public function getStatus()
     {
         return $this->hasOne(Status::className(), ['id' => 'status_id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 }

@@ -3,7 +3,6 @@
 use app\models\CustomerType;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\widgets\ColorInput;
 use yii\helpers\ArrayHelper;
 
 
@@ -51,7 +50,7 @@ use yii\helpers\ArrayHelper;
                     <?= $form->field($model, 'customer_email')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class="col-md-3">
-                    <?= $form->field($model, 'active')->dropDownList(
+                    <?= $form->field($model, 'actived')->dropDownList(
                         [
                             1 => Yii::t('app', 'Yes'),
                             2 => Yii::t('app', 'No')

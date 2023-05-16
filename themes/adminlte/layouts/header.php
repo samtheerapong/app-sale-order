@@ -18,7 +18,7 @@ use yii\bootstrap\Nav;
     }
 
     .sign-in-link {
-        background-color: #0f1ee0;
+        background-color: #1363DF;
     }
 
     .backend-link {

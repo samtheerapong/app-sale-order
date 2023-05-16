@@ -6,12 +6,13 @@ use yii\helpers\Html;
 /* @var $model app\models\SaleOrder */
 
 $this->title = Yii::t('app', 'Create Sale Order');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sale Orders'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sale Order'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sale-order-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <p> <?= Html::a('<i class="fas fa-arrow-left"></i> ' . Yii::t('app', 'Back'), ['index'], ['class' => 'btn btn-primary']) ?></p>
+
 
     <?= $this->render('_form', [
         'model' => $model,

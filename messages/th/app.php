@@ -21,6 +21,7 @@ return [
     'No' => 'ใม่',
     'Public Email' => 'อีเมล',
     'Backend' => 'หลังบ้าน',
+    'Actived' => 'เปิดใช้งาน',
 
     // Status
     'Status' => 'สถานะ',
@@ -37,8 +38,22 @@ return [
     'Create Customer Type' => 'เพิ่มประเภทลูกค้า',
     'Update Customer Type' => 'ปรับปรุง',
 
+    // Location
+    'Location' => 'สถานที่',
+    'Create Location' => 'เพิ่มสถานที่',
+    'Update Location' => 'ปรับปรุง',
+
+     // Counting Unit
+     'Unit' => 'หน่วย',
+     'Counting Unit' => 'หน่วยนับ',
+     'Create Counting Unit' => 'เพิ่มหน่วยนับ',
+     'Update Counting Unit' => 'ปรับปรุง',
+
     // Sale order
     'sale-order' => 'ขาย',
+    'Sale Order' => 'ใบสั่งขาย',
+    'Create Sale Order' => 'ใบสั่งขาย',
+    'Update Sale Order' => 'ใบสั่งขาย',
 
     // Planning
     'planning' => 'วางแผน',
@@ -51,11 +66,11 @@ return [
 
     // Warehouse
     'warehouse' => 'คลัง',
-    
+
     // Deliver
     'deliver' => 'ขนส่ง',
-    
 
-    
-    
+
+
+
 ];

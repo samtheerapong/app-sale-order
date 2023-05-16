@@ -48,15 +48,9 @@ use kartik\widgets\ColorInput;
             </div>
 
             <div class="box-footer">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <?= Html::submitButton('<i class="fa fa-save"></i> ' . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <?= Html::submitButton('<i class="fa fa-save"></i> ' . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
                 </div>
-                
             </div>
 
             <?php ActiveForm::end(); ?>
